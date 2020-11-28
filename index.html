@@ -31,25 +31,8 @@
     }
 
     window.onload = function() {
-      var things = [
-        {'id': 1, 'name': 'Macbook Pro', capacity: 5},
-        {'id': 2, 'name': '折りたたみ傘', capacity: 4},
-        {'id': 3, 'name': 'クリアファイル', capacity: 1}
-      ];
-      var group1 = {
-        "id": 1,
-        "name": "リュック",
-        "things": things,
-        "capacity": 50,
-      };
-      var group2 = {
-        "id": 2,
-        "name": "小物入れ",
-        "things": things,
-        "capacity": 20,
-      };
       loadDB();
-//      var groups = [ group1, group2 ];
+
       var groups = getUserGroups();
       updateGroupList(groups);
     };
