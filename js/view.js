@@ -16,7 +16,6 @@ function createCard(group)
   things.forEach(t => {
     html += '<li class="list-group-item">';
     html += t["name"] + ' (' + t['capacity'] + ')';
-    html += '<p class="text-right"><button>+</button></p>';
     html += '</li>';
   });
   html += '</ul>';
@@ -24,7 +23,7 @@ function createCard(group)
   html += '<div class="card-footer input-group">';
   html += '<input type="text" class="form-control">';
   html += '<div class="input-group-append">';
-  html += '<button class="btn btn-outline-secondary" type="button">Add</button>';
+  html += '<button class="btn btn-outline-secondary" type="button" onClick="addThingFromUI(this, ' + group['id'] + ')">Add</button>';
   html += '</div>';
   html += '</div>';
   return html;

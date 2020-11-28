@@ -40,8 +40,7 @@ function clearDB()
 function addThing(groupId, name, capacity)
 {
   var group = getGroup(groupId);
-  console.log(group);
-
+ 
   if (group == null) {
     console.log('グループが存在しません');
     return null;
