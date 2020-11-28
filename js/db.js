@@ -37,6 +37,24 @@ function clearDB()
   localStorage.clear();
 }
 
+function addThing(groupId, name, capacity)
+{
+  var group = getGroup(groupId);
+  console.log(group);
+
+  if (group == null) {
+    console.log('グループが存在しません');
+    return null;
+  }
+  var thing = {
+    'id': 0,
+    'name': name,
+    'capacity': capacity
+  };
+  group['things'].push(thing);
+  return thing;
+}
+
 function getThing(id)
 {
 }
