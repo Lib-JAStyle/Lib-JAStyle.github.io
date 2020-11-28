@@ -23,6 +23,21 @@
       updateGroupList(groups);
     }
 
+    function addThingFromUI(self, groupId)
+    {
+      var parentContent = self.parentElement.parentElement;
+      var inputContent = parentContent.getElementsByTagName('input');
+      var name = inputContent[0].value;
+      if (name == '') {
+        alert("グループ名が入力されていません");
+        return;
+      }
+      addThing(groupId, name, 1);
+
+      var groups = getUserGroups();
+      updateGroupList(groups);
+    }
+
     function showAddGroupInput(self)
     {
       var parentContent = self.parentElement;
