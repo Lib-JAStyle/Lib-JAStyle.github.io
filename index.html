@@ -48,11 +48,9 @@
         "things": things,
         "capacity": 20,
       };
+      loadDB();
 //      var groups = [ group1, group2 ];
       var groups = getUserGroups();
-      groups = [];
-      localStorage['groups'] = groups;
-
       updateGroupList(groups);
     };
   </script>
@@ -68,6 +66,12 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">商品登録</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="saveLocalStorage()">保存</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="loadLocalStorage()">読み込み</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" onclick="resetLocalStorage()">リセット</a>
