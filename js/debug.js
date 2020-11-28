@@ -2,16 +2,19 @@
 function resetLocalStorage()
 {
   clearDB();
+  alert('データリセットが完了しました');
 }
 
 function saveLocalStorage()
 {
   saveDB();
+  alert('データ保存が完了しました');
 }
 
 function loadLocalStorage()
 {
   loadDB();
+  alert('データ読み込みが完了しました');
 }
 
 function addDummyGroup()
