@@ -16,9 +16,43 @@ var resembles = [
   {'id': 1, 'source': 1, 'destination': 2}
 ];
 
+var groups = [];
+
+function saveDB()
+{
+  localStorage['groups'] = JSON.stringify(groups);
+}
+
+function loadDB()
+{
+  if (localStorage.getItem('groups') === null) {
+    console.log('ローカルデータが存在しません');
+    return;
+  }
+  groups = JSON.parse(localStorage['groups']);
+}
+
 function clearDB()
 {
   localStorage.clear();
+}
+
+function addThing(groupId, name, capacity)
+{
+  var group = getGroup(groupId);
+  console.log(group);
+
+  if (group == null) {
+    console.log('グループが存在しません');
+    return null;
+  }
+  var thing = {
+    'id': 0,
+    'name': name,
+    'capacity': capacity
+  };
+  group['things'].push(thing);
+  return thing;
 }
 
 function getThing(id)
@@ -32,7 +66,6 @@ function getUserThings()
 
 function createGroupId()
 {
-  var groups = localStorage['groups'];
   if (groups.length > 0) {
     return groups[groups.length - 1]['id'] + 1;
   }
@@ -41,27 +74,24 @@ function createGroupId()
 
 function addGroup(name, capacity)
 {
-  if (localStorage['groups'] == undefined) {
-    localStorage['groups'] = [];
-  }
-
   var group = {
     'id': createGroupId(),
     'name': name,
     'capacity': capacity,
     'things': []
   };
-  localStorage['groups'].push(group);
+  groups.push(group);
   return group;
 }
 
 function getGroup(id)
 {
+  return groups.find(g => g['id'] == id);
 }
 
 function getUserGroups()
 {
-  return localStorage['groups'];
+  return groups;
 }
 
 function getMasterData(name)
