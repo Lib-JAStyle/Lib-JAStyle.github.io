@@ -27,12 +27,12 @@ function addCard(targetElement, group)
   html += '<div id="group-body-' + group['id'] + '" class="card-body collapse">';
   html += '<ul class="list-group">';
   html += '</ul>';
-  html += '</div>';
 
   html += '<div class="card-footer input-group">';
   html += '<input type="text" class="form-control">';
   html += '<div class="input-group-append">';
   html += '<button class="btn btn-outline-secondary" type="button" onClick="addThingFromUI(this, ' + group['id'] + ')">Add</button>';
+  html += '</div>';
   html += '</div>';
   html += '</div>';
 
