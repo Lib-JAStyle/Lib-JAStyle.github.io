@@ -83,6 +83,12 @@ function addGroup(name, capacity)
   return group;
 }
 
+function removeGroup(id)
+{
+  // TODO: グループ数が多くなった時の処理負荷が懸念
+  groups = groups.filter(item => item['id'] !== id);
+}
+
 function getGroup(id)
 {
   return groups.find(g => g['id'] == id);
