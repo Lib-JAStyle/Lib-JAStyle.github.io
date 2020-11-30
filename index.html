@@ -36,6 +36,7 @@
         alert("グループ名が入力されていません");
         return;
       }
+      inputContent[0].value = "";
       addThing(groupId, name, 1);
 
       var group = getGroup(groupId);
