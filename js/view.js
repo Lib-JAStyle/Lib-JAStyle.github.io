@@ -10,8 +10,20 @@ function createCard(group)
   });
 
   var html = '<div class="card mt-3 ml-3" style="width: 20rem;">';
-  html += '<div class="card-header alert alert-success" data-toggle="collapse" data-target="#group-body-' + group['id'] + '">';
-  html += '<h5>' + name + ' (' + total + '/' + capacity + ')</h5>';
+  html += '<div class="card-header alert alert-success">';
+
+  // グループ操作メニューの構築
+  html += '<nav class="navbar navbar-light">';
+  html += '<h5 data-toggle="collapse" data-target="#group-body-' + group['id'] + '">' + name + ' (' + total + '/' + capacity + ')</h5>';
+  html += '<button class="dropdown-toggle" type="button" data-toggle="dropdown" data-target="group-header-' + group['id'] + '">';
+  html += '<span class="navbar-toggler-icon"></span>';
+  html += '</button>';
+  html += '<div class="dropdown-menu" id="group-header-' + group['id'] + '">';
+  html += '<a class="dropdown-item" href="#">Edit</a>';
+  html += '<a class="dropdown-item" href="#" onClick="removeGroupFromUI(this, ' + group['id'] + ')">Delete</a>';
+  html += '</div>';
+  html += '</nav>';
+
   html += '</div>';
   html += '<div id="group-body-' + group['id'] + '" class="collapse card-body">';
   html += '<ul class="list-group">';

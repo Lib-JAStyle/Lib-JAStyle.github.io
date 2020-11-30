@@ -23,6 +23,14 @@
       updateGroupList(groups);
     }
 
+    function removeGroupFromUI(self, groupId)
+    {
+      removeGroup(groupId);
+
+      var groups = getUserGroups();
+      updateGroupList(groups);
+    }
+
     function addThingFromUI(self, groupId)
     {
       var parentContent = self.parentElement.parentElement;
