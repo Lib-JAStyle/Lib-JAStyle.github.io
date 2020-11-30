@@ -18,17 +18,13 @@
         return;
       }
       addGroup(name, 20);
-
-      var groups = getUserGroups();
-      updateGroupList(groups);
+      updateGroupList(getUserGroups());
     }
 
     function removeGroupFromUI(self, groupId)
     {
       removeGroup(groupId);
-
-      var groups = getUserGroups();
-      updateGroupList(groups);
+      updateGroupList(getUserGroups());
     }
 
     function addThingFromUI(self, groupId)
@@ -42,8 +38,10 @@
       }
       addThing(groupId, name, 1);
 
-      var groups = getUserGroups();
-      updateGroupList(groups);
+      var group = getGroup(groupId);
+      var groupElement = document.getElementById("group-" + groupId);
+      var bodyElement = groupElement.getElementsByClassName("card-body")[0];
+      updateThings(bodyElement, group["id"], group["things"]);
     }
 
     function showAddGroupInput(self)
@@ -55,9 +53,7 @@
 
     window.onload = function() {
       loadDB();
-
-      var groups = getUserGroups();
-      updateGroupList(groups);
+      updateGroupList(getUserGroups());
     };
   </script>
 </head>
