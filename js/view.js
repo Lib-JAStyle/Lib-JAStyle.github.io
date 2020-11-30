@@ -85,6 +85,6 @@ function updateHeader(groups)
   groups.forEach(g => {
     totalThings += g["things"].length;
   });
-  document.getElementById("total_thing").innerHTML = "Thing : " + totalThings;
-  document.getElementById("total_group").innerHTML = "Group : " + groups.length;
+  document.getElementById("total_thing").innerHTML = "モノの数 : " + totalThings;
+  document.getElementById("total_group").innerHTML = "グループの数 : " + groups.length;
 }
