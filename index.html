@@ -36,6 +36,7 @@
         alert("グループ名が入力されていません");
         return;
       }
+      inputContent[0].value = "";
       addThing(groupId, name, 1);
 
       var group = getGroup(groupId);
@@ -60,14 +61,11 @@
 <body>
 <header>
   <nav class="navbar navbar-expand bg-dark">
-    <a class="navbar-brand" href="#">Test Service</a>
+    <a class="navbar-brand" href="#">所持品管理</a>
 
     <ui class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" href="./thing_list/index.html">所持品</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">商品登録</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" onclick="saveLocalStorage()">保存</a>
@@ -82,7 +80,7 @@
   </nav>
 </header>
 <main>
-  <ul class="row mt-3 ml-3 list-group list-group-horizontal">
+  <ul class="row mt-4 ml-4 list-group list-group-horizontal">
     <li id="total_thing" class="col-2 list-group-item">Thing : </li>
     <li id="total_group" class="col-2 list-group-item">Group : </li>
   </ul>

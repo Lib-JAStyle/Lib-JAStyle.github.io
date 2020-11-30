@@ -3,7 +3,6 @@ function addCard(targetElement, group)
 {
   var total = 0;
   var name = group["name"];
-  var capacity = group["capacity"];
   var things = group["things"];
   things.forEach(t => {
     total += t['capacity'];
@@ -14,7 +13,7 @@ function addCard(targetElement, group)
 
   // グループ操作メニューの構築
   html += '<nav class="navbar navbar-light">';
-  html += '<h5 data-toggle="collapse" data-target="#group-body-' + group['id'] + '">' + name + ' (' + total + '/' + capacity + ')</h5>';
+  html += '<h5 data-toggle="collapse" data-target="#group-body-' + group['id'] + '">' + name + ' (' + total + ')</h5>';
   html += '<button class="dropdown-toggle" type="button" data-toggle="dropdown" data-target="group-header-' + group['id'] + '">';
   html += '<span class="navbar-toggler-icon"></span>';
   html += '</button>';
@@ -50,7 +49,7 @@ function updateThings(bodyElement, groupId, things)
   var html = "";
   things.forEach(t => {
     html += '<li class="list-group-item">';
-    html += t["name"] + ' (' + t['capacity'] + ')';
+    html += t["name"];
     html += '</li>';
   });
   listGroupElement.innerHTML = html;
