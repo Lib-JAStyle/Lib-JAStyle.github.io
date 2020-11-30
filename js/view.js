@@ -49,6 +49,7 @@ function updateThings(bodyElement, groupId, things)
   var html = "";
   things.forEach(t => {
     html += '<li class="list-group-item">';
+    html += '<div data-toggle="modal" data-target="#exampleModal">'
     html += t["name"];
     html += '</li>';
   });
