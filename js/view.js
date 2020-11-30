@@ -56,6 +56,10 @@ function updateThings(bodyElement, groupId, things)
   listGroupElement.innerHTML = html;
 }
 
+function updateThingDetail()
+{
+}
+
 function createAddCard()
 {
   var html = '<div class="card mt-3 ml-3" style="width: 20rem; height: 10rem;">';
