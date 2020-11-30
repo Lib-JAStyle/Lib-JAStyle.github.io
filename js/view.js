@@ -25,7 +25,7 @@ function addCard(targetElement, group)
   html += '</nav>';
   html += '</div>';
 
-  html += '<div id="group-body-' + group['id'] + '" class="card-body">';
+  html += '<div id="group-body-' + group['id'] + '" class="card-body collapse">';
   html += '<ul class="list-group">';
   html += '</ul>';
   html += '</div>';
