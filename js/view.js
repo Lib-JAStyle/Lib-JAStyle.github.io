@@ -10,8 +10,10 @@ function createCard(group)
   });
 
   var html = '<div class="card mt-3 ml-3" style="width: 20rem;">';
-  html += '<h5 class="card-header alert alert-success">' + name + ' (' + total + '/' + capacity + ')</h5>';
-  html += '<div class="card-body">';
+  html += '<div class="card-header alert alert-success" data-toggle="collapse" data-target="#group-body-' + group['id'] + '">';
+  html += '<h5>' + name + ' (' + total + '/' + capacity + ')</h5>';
+  html += '</div>';
+  html += '<div id="group-body-' + group['id'] + '" class="collapse card-body">';
   html += '<ul class="list-group">';
   things.forEach(t => {
     html += '<li class="list-group-item">';
