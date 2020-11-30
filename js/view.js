@@ -1,5 +1,5 @@
 
-function createCard(group)
+function addCard(targetElement, group)
 {
   var total = 0;
   var name = group["name"];
@@ -9,7 +9,7 @@ function createCard(group)
     total += t['capacity'];
   });
 
-  var html = '<div class="card mt-3 ml-3" style="width: 20rem;">';
+  var html = '<div id="group-' + group['id'] + '" class="card mt-3 ml-3" style="width: 20rem;">';
   html += '<div class="card-header alert alert-success">';
 
   // グループ操作メニューの構築
@@ -23,24 +23,37 @@ function createCard(group)
   html += '<a class="dropdown-item" href="#" onClick="removeGroupFromUI(this, ' + group['id'] + ')">Delete</a>';
   html += '</div>';
   html += '</nav>';
-
   html += '</div>';
-  html += '<div id="group-body-' + group['id'] + '" class="collapse card-body">';
+
+  html += '<div id="group-body-' + group['id'] + '" class="card-body">';
   html += '<ul class="list-group">';
-  things.forEach(t => {
-    html += '<li class="list-group-item">';
-    html += t["name"] + ' (' + t['capacity'] + ')';
-    html += '</li>';
-  });
   html += '</ul>';
   html += '</div>';
+
   html += '<div class="card-footer input-group">';
   html += '<input type="text" class="form-control">';
   html += '<div class="input-group-append">';
   html += '<button class="btn btn-outline-secondary" type="button" onClick="addThingFromUI(this, ' + group['id'] + ')">Add</button>';
   html += '</div>';
   html += '</div>';
-  return html;
+
+  targetElement.innerHTML += html;
+
+  var groupElement = document.getElementById("group-" + group["id"]);
+  updateThings(groupElement, group["id"], group["things"]);
+}
+
+function updateThings(bodyElement, groupId, things)
+{
+  var listGroupElement = bodyElement.getElementsByTagName("ul")[0];
+
+  var html = "";
+  things.forEach(t => {
+    html += '<li class="list-group-item">';
+    html += t["name"] + ' (' + t['capacity'] + ')';
+    html += '</li>';
+  });
+  listGroupElement.innerHTML = html;
 }
 
 function createAddCard()
@@ -60,7 +73,7 @@ function updateGroupList(groups)
   var groupListContent = document.getElementById("group-list");
   groupListContent.innerHTML = "";
   groups.forEach(g => {
-    groupListContent.innerHTML += createCard(g);
+    addCard(groupListContent, g);
   });
   groupListContent.innerHTML += createAddCard();
 
