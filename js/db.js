@@ -1,21 +1,3 @@
-var db = [
-  {'id': 1, 'name': 'ノートパソコン', 'category': '家電', 'size': 10},
-  {'id': 2, 'name': 'クリアファイル', 'category': '文具', 'size': 2},
-  {'id': 3, 'name': 'はんこ', 'category': '文具', 'size': 2},
-  {'id': 4, 'name': 'USBケーブル', 'category': '家電', 'size': 2},
-  {'id': 5, 'name': '名刺入れ', 'category': '文具', 'size': 2},
-  {'id': 6, 'name': '扇子', 'category': 'その他', 'size': 4},
-  {'id': 7, 'name': '折りたたみ傘', 'category': '雨具', 'size': 7},
-  {'id': 8, 'name': 'ハサミ', 'category': '文具', 'size': 3},
-  {'id': 9, 'name': '爪切り', 'category': '文具', 'size': 2},
-  {'id': 10, 'name': 'スティックのり', 'category': '文具', 'size': 2},
-  {'id': 11, 'name': 'タブレット', 'category': '家電', 'size': 5},
-];
-
-var resembles = [
-  {'id': 1, 'source': 1, 'destination': 2}
-];
-
 var groups = [];
 
 function saveDB()
@@ -37,7 +19,21 @@ function clearDB()
   localStorage.clear();
 }
 
-function addThing(groupId, name, capacity)
+function createThingId(groupId)
+{
+  var group = getGroup(groupId);
+  if (group == null) {
+    console.log('グループが存在しません');
+    return null;
+  }
+  var length = group['things'].length;
+  if (length == 0) {
+    return 1;
+  }
+  return group['things'][length]['id'] + 1;
+}
+
+function addThing(groupId, name, count)
 {
   var group = getGroup(groupId);
  
@@ -46,21 +42,23 @@ function addThing(groupId, name, capacity)
     return null;
   }
   var thing = {
-    'id': 0,
+    'id': createThingId(groupId),
     'name': name,
-    'capacity': capacity
+    'count': count,
+    'note': ''
   };
   group['things'].push(thing);
   return thing;
 }
 
-function getThing(id)
+function getThing(groupId, id)
 {
-}
-
-function getUserThings()
-{
-  return localStorage['things'];
+  var group = getGroup(grorupId);
+  if (group == null) {
+    console.log('グループが存在しません');
+    return null;
+  }
+  return groups['things'].find(t => t['id'] == id);
 }
 
 function createGroupId()
@@ -97,9 +95,4 @@ function getGroup(id)
 function getUserGroups()
 {
   return groups;
-}
-
-function getMasterData(name)
-{
-  return db.find(d => d['name'] == name);
 }

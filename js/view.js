@@ -53,7 +53,11 @@ function updateThings(bodyElement, groupId, things)
     html += t["name"];
     html += '</li>';
   });
-  listGroupElement.innerHTML = html;
+  listGroupElement.innerHTML += html;
+}
+
+function updateThingDetail()
+{
 }
 
 function createAddCard()
