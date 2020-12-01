@@ -30,7 +30,7 @@ function createThingId(groupId)
   if (length == 0) {
     return 1;
   }
-  return group['things'][length]['id'] + 1;
+  return group['things'][length - 1]['id'] + 1;
 }
 
 function addThing(groupId, name, count)
