@@ -42,6 +42,7 @@
       var group = getGroup(groupId);
       var groupElement = document.getElementById("group-" + groupId);
       var bodyElement = groupElement.getElementsByClassName("card-body")[0];
+      bodyElement.getElementsByTagName("ul")[0].innerHTML = "";
       updateThings(bodyElement, group["id"], group["things"]);
     }
 
