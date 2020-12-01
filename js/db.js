@@ -33,6 +33,20 @@ function createThingId(groupId)
   return group['things'][length - 1]['id'] + 1;
 }
 
+function updateThing(groupId, thing)
+{
+  var group = getGroup(groupId);
+  var index = group['things'].findIndex(function(t) {
+    return t['id'] == thing['id'];
+  });
+
+  if (index == -1) {
+    group['things'].push(thing);
+  } else {
+    group['things'][index] = thing;
+  }
+}
+
 function addThing(groupId, name, count)
 {
   var group = getGroup(groupId);
@@ -53,12 +67,12 @@ function addThing(groupId, name, count)
 
 function getThing(groupId, id)
 {
-  var group = getGroup(grorupId);
+  var group = getGroup(groupId);
   if (group == null) {
     console.log('グループが存在しません');
     return null;
   }
-  return groups['things'].find(t => t['id'] == id);
+  return group['things'].find(t => t['id'] == id);
 }
 
 function createGroupId()

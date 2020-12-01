@@ -49,15 +49,11 @@ function updateThings(bodyElement, groupId, things)
   var html = "";
   things.forEach(t => {
     html += '<li class="list-group-item">';
-    html += '<div data-toggle="modal" data-target="#exampleModal">'
-    html += t["name"];
+    html += '<thing-node v-bind:data-target="#exampleModal" v-bind:group-id=' + groupId + ' v-bind:thing-id=' + t["id"] + ' v-bind:name=' + t["name"] + '>';
+    html += '</thing-node>'
     html += '</li>';
   });
   listGroupElement.innerHTML += html;
-}
-
-function updateThingDetail()
-{
 }
 
 function createAddCard()
@@ -80,16 +76,4 @@ function updateGroupList(groups)
     addCard(groupListContent, g);
   });
   groupListContent.innerHTML += createAddCard();
-
-  updateHeader(groups);
-}
-
-function updateHeader(groups)
-{
-  var totalThings = 0;
-  groups.forEach(g => {
-    totalThings += g["things"].length;
-  });
-  document.getElementById("total_thing").innerHTML = "モノの数 : " + totalThings;
-  document.getElementById("total_group").innerHTML = "グループの数 : " + groups.length;
 }
