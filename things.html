@@ -10,11 +10,32 @@
     window.onload = function() {
       loadDB();
       
+      var things = [];
       var groups = getUserGroups();
-      var bodyElement = document.getElementById("thing-list");
       groups.forEach(g => {
-        updateThings(bodyElement, g['id'], g['things']);
+        g['things'].forEach(t => {
+          // TODO: things と groups を分けて、リレーションはった方が良いか？
+          t['group-name'] = g['name'];
+          things.push(t);
+        });
       });
+
+      // TODO: 生成した HTMLElement に対してのソートを行いたい
+      things.sort(function(a, b) {
+        return a["name"].localeCompare(b["name"], 'ja');
+      });
+
+      var html = "";
+      things.forEach(t => {
+        html += '<li class="list-group-item">';
+        html += '<span class="mb-1">' + t["name"] + '</span>';
+        html += '<small class="float-right">' + t['group-name'] + '</small>'
+        html += '</li>';
+      });
+      var bodyElement = document.getElementById("thing-list");
+      var listGroupElement = bodyElement.getElementsByTagName("ul")[0];
+      listGroupElement.innerHTML += html;
+
       updateHeader(groups);
     };
   </script>
