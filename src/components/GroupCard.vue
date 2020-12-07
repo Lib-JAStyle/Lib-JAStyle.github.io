@@ -15,6 +15,7 @@
 
     <div v-bind:id="'group-body-' + id" class="card-body collapse">
       <ul class="list-group">
+        <ThingNode />
       </ul>
     </div>
 
@@ -28,8 +29,13 @@
 </template>
 
 <script>
+import ThingNode from "./ThingNode.vue"
+
 export default {
   name: "GroupCard",
+  components: {
+    ThingNode
+  },
   props: ["id"],
   created() {
   },
@@ -46,7 +52,7 @@ export default {
     removeGroup: function() {
       alert(this.id);
     }
-  }
+  },
 }
 </script>
 
