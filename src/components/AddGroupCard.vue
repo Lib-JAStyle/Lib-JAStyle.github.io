@@ -3,7 +3,7 @@
     <div class="card-header">
       <template v-if="showInput">
         <input type="text" v-model="groupName" />
-        <button class="btn btn-outline-secondary ml-2" type="button" v-on:click="createGroup">ADD</button>
+        <button class="btn btn-outline-secondary ml-2" type="button" v-on:click="onClickCreateGroup">ADD</button>
       </template>
       <template v-else>
         <button class="btn btn-outline-secondary" type="button" v-on:click="showAddGroupInput">+</button>
@@ -25,9 +25,10 @@ export default {
     }
   },
   methods: {
-    createGroup: function() {
+    onClickCreateGroup: function() {
       if (this.groupName == "") {
         alert("グループ名が入力されていません");
+        return;
       }
       this.addGroup(this.groupName, 10);
       this.saveDB();
