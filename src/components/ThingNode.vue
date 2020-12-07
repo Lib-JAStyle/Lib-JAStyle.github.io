@@ -1,13 +1,16 @@
 <template>
-  <div>
+  <div data-toggle="modal" v-bind:data-target="data-target" v-on:click="updateThingContent">
+    {{ name }}
   </div>
 </template>
 
 <script>
 export default {
-  name: "THingNode",
-  data: function() {
-    return {
+  name: "ThingNode",
+  props: [ "group-id", "id", "name", "data-target" ],
+  methods: {
+    updateThingContent: function() {
+      alert(this.id);
     }
   }
 }

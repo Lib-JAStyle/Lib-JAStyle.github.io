@@ -15,7 +15,9 @@
 
     <div v-bind:id="'group-body-' + id" class="card-body collapse">
       <ul class="list-group">
-        <ThingNode />
+        <li class="list-group-item" v-for="t in things" v-bind:key="t.id">
+          <ThingNode v-bind:id="t.id" v-bind:group-id="id" v-bind:name="t.name" v-bind:data-target="a" />
+        </li>
       </ul>
     </div>
 
@@ -30,6 +32,7 @@
 
 <script>
 import ThingNode from "./ThingNode.vue"
+import DBMixins from '../mixins/db.js'
 
 export default {
   name: "GroupCard",
@@ -38,11 +41,18 @@ export default {
   },
   props: ["id"],
   created() {
+    this.loadDB();
+
+    var group = this.getGroup(this.id);
+    this.name = group.name;
+    this.total = group.things.length;
+    this.things = group.things;
   },
   data: function() {
     return {
       name: "Test",
-      total: 10
+      total: 10,
+      things: [],
     }
   },
   methods: {
@@ -53,6 +63,7 @@ export default {
       alert(this.id);
     }
   },
+  mixins: [DBMixins]
 }
 </script>
 

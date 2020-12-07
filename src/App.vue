@@ -4,8 +4,10 @@
       <NavBar />
     </div>
     <div @click="onClick()">
-      <InformationBar v-bind:things="things" v-bind:groups="groups" />
-      <GroupCard id=1 />
+      <InformationBar v-bind:things="thing_count" v-bind:groups="group_count" />
+      <div v-for="g in groups" v-bind:key="g.id">
+        <GroupCard v-bind:id="g.id" />
+      </div>
       <AddGroupCard />
     </div>
   </div>
@@ -29,16 +31,18 @@ export default {
       totalThings += g["things"].length;
     });
 
-    this.things = totalThings;
-    this.groups = groups.length;
+    this.groups = groups;
+    this.thing_count = totalThings;
+    this.group_count = groups.length;
   },
   components: {
     NavBar, GroupCard, AddGroupCard, InformationBar
   },
   data: function() {
     return {
-      things: 0,
-      groups: 0,
+      groups: [],
+      thing_count: 0,
+      group_count: 0,
     }
   },
   mixins: [DBMixins]
