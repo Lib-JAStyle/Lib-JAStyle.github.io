@@ -33,6 +33,7 @@ export default {
     },
     updateThing: function(groupId, thing) {
       var group = this.getGroup(groupId);
+      console.log(group);
       var index = group['things'].findIndex(function(t) {
         return t['id'] == thing['id'];
       });

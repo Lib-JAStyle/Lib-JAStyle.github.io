@@ -1,5 +1,6 @@
 <template>
-  <div id="exampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div id="exampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false"> -->
+  <div>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -10,17 +11,17 @@
         </div>
         <div class="modal-body">
           <div class="row ml-2">
-            <input type="text" placeholder="商品名" v-model=name>
+            <input type="text" placeholder="商品名" v-model=thing.name>
           </div>
           <div class="row mt-3 ml-2">
-            <input type="text" placeholder="個数" v-model=count>
+            <input type="text" placeholder="個数" v-model=thing.count>
           </div>
           <div class="row mt-3 ml-2">
-            <textarea placeholder="メモ" rows="5" cols="50" v-model=note></textarea>
+            <textarea placeholder="メモ" rows="5" cols="50" v-model=thing.note></textarea>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onClick="updateThingFromUI()">更新</button>
+          <button type="button" class="btn btn-primary" v-on:click="onClickUpdateThing">更新</button>
         </div>
       </div>
     </div>
@@ -32,23 +33,15 @@ import DBMixins from '../mixins/db.js'
 
 export default {
   name: "ThingDetail",
-  props: [ "groupid", "id" ],
-  data: function() {
-    return {
-      name: "",
-      count: 1,
-      note: ""
+  props: [ "group_id", "thing" ],
+  methods: {
+    onClickUpdateThing: function() {
+      this.loadDB();
+      this.updateThing(this.group_id, this.thing);
+      this.saveDB();
+
+      this.$emit("onCloseThingDetail");
     }
-  },
-  created: function() {
-    if (this.id == undefined) {
-      console.log("特にデータは指定されていません");
-      return;
-    }
-    var thing = this.getThing(this.groupid, this.id);
-    console.log("THING ID : " + thing.id);
-    console.log("THING GROUP ID : " + thing.name);
-    console.log("THING GROUP ID : " + thing.count);
   },
   mixins: [DBMixins]
 }

@@ -16,7 +16,7 @@
     <div v-bind:id="'group-body-' + id" class="card-body collapse">
       <ul class="list-group">
         <li class="list-group-item" v-for="t in things" v-bind:key="t.id">
-          <ThingNode v-bind:id="t.id" v-bind:groupid="id" v-bind:name="t.name" target="exampleModal" />
+          <ThingNode v-bind:id="t.id" v-bind:groupid="id" v-bind:name="t.name" v-on:onClickThing="onClickThing" />
         </li>
       </ul>
     </div>
@@ -64,6 +64,9 @@ export default {
     onClickRemoveGroup: function() {
       this.removeGroup(this.id);
       this.saveDB();
+    },
+    onClickThing: function(thingId) {
+      this.$emit("onClickThing", this.id, thingId);
     }
   },
   mixins: [DBMixins]

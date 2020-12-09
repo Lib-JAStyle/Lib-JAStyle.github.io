@@ -1,5 +1,5 @@
 <template>
-  <div data-toggle="modal" v-bind:data-target="target" v-on:click="updateThingContent">
+  <div data-toggle="modal" v-on:click="updateThingContent">
     {{ name }}
   </div>
 </template>
@@ -7,13 +7,12 @@
 <script>
 export default {
   name: "ThingNode",
-  props: [ "groupid", "id", "name", "target" ],
+  props: ["groupid", "id", "name"],
   created: function() {
   },
   methods: {
     updateThingContent: function() {
-      // ウィンドウを開くように、親コンポーネントへの通知が必要
-      alert(this.id);
+      this.$emit("onClickThing", this.id);
     }
   }
 }
