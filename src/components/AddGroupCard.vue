@@ -30,8 +30,11 @@ export default {
         alert("グループ名が入力されていません");
         return;
       }
+      this.loadDB();
       this.addGroup(this.groupName, 10);
       this.saveDB();
+
+      this.$emit("onUpdateGroup");
 
       this.showInput = !this.showInput;
     },

@@ -31,7 +31,6 @@ export default {
   props: [ "group_id", "thing" ],
   methods: {
     onClickUpdateThing: function() {
-      alert(123);
       this.loadDB();
       this.updateThing(this.group_id, this.thing);
       this.saveDB();

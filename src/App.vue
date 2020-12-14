@@ -10,7 +10,7 @@
         <div class="ml-2" v-for="g in groups" v-bind:key="g.id">
           <GroupCard v-bind:id="g.id" v-on:onClickThing="onClickThing" />
         </div>
-        <AddGroupCard />
+        <AddGroupCard v-on:onUpdateGroup="onUpdateGroup" />
       </div>
     </div>
 
@@ -29,22 +29,7 @@ import DBMixins from './mixins/db.js'
 export default {
   name: 'App',
   created() {
-    this.loadDB();
-
-    var groups = this.getUserGroups();
-    var totalThings = 0;
-    groups.forEach(g => {
-      totalThings += g["things"].length;
-    });
-
-    this.thing = {
-      name: "",
-      count: 0,
-      note: ""
-    };
-    this.groups = groups;
-    this.thing_count = totalThings;
-    this.group_count = groups.length;
+    this.updateGroup();
   },
   components: {
     NavBar, GroupCard, AddGroupCard, ThingDetail, InformationBar
@@ -59,6 +44,27 @@ export default {
     }
   },
   methods: {
+    updateGroup: function() {
+      this.loadDB();
+
+      var groups = this.getUserGroups();
+      var totalThings = 0;
+      groups.forEach(g => {
+        totalThings += g["things"].length;
+      });
+
+      this.thing = {
+        name: "",
+        count: 0,
+        note: ""
+      };
+      this.groups = groups;
+      this.thing_count = totalThings;
+      this.group_count = groups.length;
+    },
+    onUpdateGroup: function() {
+      this.updateGroup();
+    },
     onClickThing: function(groupId, thingId) {
       this.groupId = groupId;
       this.thing = this.getThing(groupId, thingId);

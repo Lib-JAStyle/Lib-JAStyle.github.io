@@ -58,8 +58,15 @@ export default {
   },
   methods: {
     onClickAddThing: function() {
+      if (this.thing_name == "") {
+        alert("モノの名前が入力されていません");
+        return;
+      }
       this.addThing(this.id, this.thing_name, 1);
       this.saveDB();
+
+      ++this.total;
+      this.thing_name = "";
     },
     onClickRemoveGroup: function() {
       this.removeGroup(this.id);
