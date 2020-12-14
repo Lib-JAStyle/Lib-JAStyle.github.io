@@ -68,13 +68,14 @@ export default {
       this.updateGroup();
     },
     onClickThing: function(groupId, thingId) {
+      this.loadDB();
       this.groupId = groupId;
       this.thing = this.getThing(groupId, thingId);
 
       this.$modal.show("exampleModal");
     },
     onCloseThingDetail: function() {
-      alert("更新が完了しました");
+      this.updateGroup();
       this.$modal.hide("exampleModal");
     }
   },

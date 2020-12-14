@@ -18,6 +18,7 @@
       </div>
       <div class="row mt-3 ml-2">
         <button type="button" class="btn btn-primary" v-on:click="onClickUpdateThing">更新</button>
+        <button type="button" class="btn btn-danger ml-2" v-on:click="onClickRemoveThing">削除</button>
       </div>
     </div>
   </modal>
@@ -35,10 +36,19 @@ export default {
       this.updateThing(this.group_id, this.thing);
       this.saveDB();
 
+      alert("更新が完了しました");
       this.$emit("onCloseThingDetail");
     },
     onClickCloseThing: function() {
       this.$modal.hide("exampleModal");
+    },
+    onClickRemoveThing: function() {
+      this.loadDB();
+      this.removeThing(this.group_id, this.thing.id);
+      this.saveDB();
+
+      alert("削除が完了しました");
+      this.$emit("onCloseThingDetail");
     }
   },
   mixins: [DBMixins]

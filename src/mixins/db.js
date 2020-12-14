@@ -68,6 +68,15 @@ export default {
       }
       return group['things'].find(t => t['id'] == id);
     },
+    removeThing: function(groupId, thingId) {
+      var group = this.getGroup(groupId);
+      if (group == null) {
+        console.log('グループが存在しません');
+        return null;
+      }
+      // TODO: グループ数が多くなった時の処理負荷が懸念
+      group.things = group.things.filter(item => item['id'] !== thingId);
+    },
     createGroupId: function() {
       if (this.groups.length > 0) {
         return this.groups[this.groups.length - 1]['id'] + 1;
