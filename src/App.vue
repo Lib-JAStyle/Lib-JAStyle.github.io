@@ -10,7 +10,9 @@
         <div class="ml-2" v-for="g in groups" v-bind:key="g.id">
           <GroupCard v-bind:id="g.id" v-on:onClickThing="onClickThing" v-on:onUpdateGroup="onUpdateGroup" />
         </div>
-        <AddGroupCard v-on:onUpdateGroup="onUpdateGroup" />
+        <div class="ml-2">
+          <AddGroupCard v-on:onUpdateGroup="onUpdateGroup" />
+        </div>
       </div>
     </div>
 
