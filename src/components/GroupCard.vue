@@ -71,6 +71,8 @@ export default {
     onClickRemoveGroup: function() {
       this.removeGroup(this.id);
       this.saveDB();
+
+      this.$emit("onUpdateGroup");
     },
     onClickThing: function(thingId) {
       this.$emit("onClickThing", this.id, thingId);
