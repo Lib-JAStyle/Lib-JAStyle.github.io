@@ -56,7 +56,7 @@ export class Model
     if (!collections) {
       return null;
     }
-    return collections.find(m => m.id == id);
+    return JSON.parse(collections).find(m => m.id == id);
   }
 
   static find(predicate)
@@ -65,7 +65,7 @@ export class Model
     if (!collections) {
       return null;
     }
-    return collections.find(predicate);
+    return JSON.parse(collections).find(predicate);
   }
 
   static delete(id)

@@ -32,7 +32,8 @@
 
 <script>
 import ThingNode from "./ThingNode.vue"
-import DBMixins from '../mixins/db.js'
+import {Group} from '../models/Group.js'
+import {Thing} from '../models/Thing.js'
 
 export default {
   name: "GroupCard",
@@ -41,12 +42,11 @@ export default {
   },
   props: ["id"],
   created() {
-    this.loadDB();
+    var group = Group.findFromId(this.id);
+    this.things = Thing.allFromGroupId(this.id);
 
-    var group = this.getGroup(this.id);
     this.name = group.name;
-    this.total = group.things.length;
-    this.things = group.things;
+    this.total = this.things.length;
   },
   data: function() {
     return {
@@ -62,23 +62,23 @@ export default {
         alert("モノの名前が入力されていません");
         return;
       }
-      this.addThing(this.id, this.thing_name, 1);
-      this.saveDB();
+      var thing = new Thing();
+      thing.groupId = this.id;
+      thing.name = this.thing_name;
+      thing.save();
 
       ++this.total;
       this.thing_name = "";
+      this.things.push(thing);
     },
     onClickRemoveGroup: function() {
-      this.removeGroup(this.id);
-      this.saveDB();
-
+      Group.delete(this.id);
       this.$emit("onUpdateGroup");
     },
     onClickThing: function(thingId) {
       this.$emit("onClickThing", this.id, thingId);
     }
   },
-  mixins: [DBMixins]
 }
 </script>
 

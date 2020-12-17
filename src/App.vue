@@ -26,7 +26,9 @@ import GroupCard from './components/GroupCard.vue'
 import ThingDetail from './components/ThingDetail.vue'
 import AddGroupCard from './components/AddGroupCard.vue'
 import InformationBar from './components/InformationBar.vue'
-import DBMixins from './mixins/db.js'
+
+import {Group} from './models/Group.js'
+import {Thing} from './models/Thing.js'
 
 export default {
   name: 'App',
@@ -47,30 +49,21 @@ export default {
   },
   methods: {
     updateGroup: function() {
-      this.loadDB();
-
-      var groups = this.getUserGroups();
-      var totalThings = 0;
-      groups.forEach(g => {
-        totalThings += g["things"].length;
-      });
-
+      this.groups = Group.all();
+      this.thing_count = Thing.count();
+      this.group_count = this.groups.length;
       this.thing = {
         name: "",
         count: 0,
         note: ""
       };
-      this.groups = groups;
-      this.thing_count = totalThings;
-      this.group_count = groups.length;
     },
     onUpdateGroup: function() {
       this.updateGroup();
     },
     onClickThing: function(groupId, thingId) {
-      this.loadDB();
       this.groupId = groupId;
-      this.thing = this.getThing(groupId, thingId);
+      this.thing = Thing.find(t => { return t["group_id"] == groupId && t["id"] == thingId; });
 
       this.$modal.show("exampleModal");
     },
@@ -79,7 +72,6 @@ export default {
       this.$modal.hide("exampleModal");
     }
   },
-  mixins: [DBMixins]
 }
 </script>
 

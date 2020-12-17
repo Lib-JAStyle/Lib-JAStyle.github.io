@@ -21,4 +21,9 @@ export class Thing extends Model
       note: this.note
     };
   }
+
+  static allFromGroupId(groupId)
+  {
+    return Thing.all().filter(t => t["group_id"] == groupId);
+  }
 }

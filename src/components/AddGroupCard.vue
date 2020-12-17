@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import DBMixins from '../mixins/db.js'
+import {Group} from '../models/Group.js'
 
 export default {
   name: "AddGroupCard",
@@ -30,19 +30,17 @@ export default {
         alert("グループ名が入力されていません");
         return;
       }
-      this.loadDB();
-      this.addGroup(this.groupName, 10);
-      this.saveDB();
+      var group = new Group();
+      group.name = this.groupName;
+      group.save()
 
       this.$emit("onUpdateGroup");
-
       this.showInput = !this.showInput;
     },
     showAddGroupInput: function() {
       this.showInput = !this.showInput;
     }
   },
-  mixins: [DBMixins]
 }
 </script>
 

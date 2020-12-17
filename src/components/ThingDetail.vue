@@ -25,16 +25,18 @@
 </template>
 
 <script>
-import DBMixins from '../mixins/db.js'
+import {Thing} from '../models/Thing.js'
 
 export default {
   name: "ThingDetail",
   props: [ "group_id", "thing" ],
   methods: {
     onClickUpdateThing: function() {
-      this.loadDB();
-      this.updateThing(this.group_id, this.thing);
-      this.saveDB();
+      var thing = Thing.findFromId(this.thing.id);
+      thing.name = this.thing.name;
+      thing.count = this.thing.count;
+      thing.note = this.thing.note;
+      thing.save();
 
       alert("更新が完了しました");
       this.$emit("onCloseThingDetail");
@@ -43,15 +45,12 @@ export default {
       this.$modal.hide("exampleModal");
     },
     onClickRemoveThing: function() {
-      this.loadDB();
-      this.removeThing(this.group_id, this.thing.id);
-      this.saveDB();
+      Thing.delete(this.thing.id);
 
       alert("削除が完了しました");
       this.$emit("onCloseThingDetail");
     }
   },
-  mixins: [DBMixins]
 }
 </script>
 
