@@ -11,38 +11,22 @@
 </template>
 
 <script>
-import DBMixins from '../mixins/db.js'
-
 export default {
   name: "NavBar",
   data: function() {
     return {
       title: "所持品管理",
       menu: [
-        { text: "所持品", href: "./things.html", onClick: this.dummy },
-        { text: "保存", href: "#", onClick: this.saveLocalStorage },
-        { text: "読み込み", href: "#", onClick: this.loadLocalStorage },
         { text: "リセット", href: "#", onClick: this.resetLocalStorage },
       ]
     }
   },
   methods: {
-    dummy: function() {
-    },
-    saveLocalStorage: function() {
-      this.saveDB();
-      alert("データを保存しました");
-    },
-    loadLocalStorage: function() {
-      this.loadDB();
-      alert("データを読み込みました");
-    },
     resetLocalStorage: function() {
-      this.clearDB();
       alert("データを削除しました");
+      localStorage.clear();
     }
   },
-  mixins: [DBMixins]
 }
 </script>
 
